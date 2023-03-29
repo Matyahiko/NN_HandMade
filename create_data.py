@@ -1,27 +1,26 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
+import matplotlib.pylab as plt
+import pandas as pd
 
-x = np.random.rand(100, 1)
+def data():
+    x = np.random.rand(100, 1)
 
-    # ww          ww           ww
-    #   ww       ww ww       ww
-    #     ww    ww   ww    ww
-    #       wwww       wwww
-    #       wwww       wwww
+        # ww          ww           ww
+        #   ww       ww ww       ww
+        #     ww    ww   ww    ww
+        #       wwww       wwww
+        #       wwww       wwww
+        
+    y = np.cos(x*4*np.pi ) + np.random.rand(100, 1)
+    True_label = np.cos(x*4*np.pi)
     
-y = np.cos(4 * np.pi * x) + np.random.rand(100, 1)
-#y =np.cos(x)+np.random.rand(100,1)
-#y = np.sin(x)+np.random.rand(100,1)
+    plt.scatter(x, y)
+    plt.show()
 
+    df = pd.DataFrame(np.hstack((x,y,True_label)), columns=['x', 'y','True_label'])
+    df.to_csv('data.csv', index=False)
 
+    return x, y
 
-
-plt.figure(figsize=(10, 7.5))
-plt.scatter(x, y) # 散布図
-plt.xlabel('x') # x軸ラベル
-plt.ylabel('y') # y軸ラベル
-plt.suptitle('dataset', fontsize=20) # 図全体のタイトル
-plt.title('N=' + str(len(x)), loc='left') # タイトル
-plt.grid() # グリッド線
-plt.show()
+if __name__ == '__main__':
+    data()
